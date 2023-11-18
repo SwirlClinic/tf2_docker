@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  tf2_server:
+    build: .
+    platform: linux/amd64
+    container_name: "tf2_server"
+    volumes:
+      - "./tf2data:/app/tf-dedicated:rw"
+      - "./custom:/app/custom-config:rw"
+    ports:
+      - "27015:27015/udp"
+    environment:
+      - SRCDS_STARTMAP=ctf_2fort
+      - SRCDS_TICKRATE=128
+      - SRCDS_GAMETYPE=1
+      - SRCDS_GAMEMODE=2
+      - SRCDS_MAXPLAYERS=32
+    stdin_open: true
+    tty: true
